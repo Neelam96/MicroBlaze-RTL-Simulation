@@ -31,7 +31,7 @@ source <path-to-build.tcl>/build.tcl
 ## Debugging any error encountered while sourcing build.tcl
 	- ERROR: [BD_TCL-115] The following IPs are not found in the IP Catalog.
 	Solution:
-	- Change your IP repository path of HOG-SVM accelerator obtained from HLS in line no 153 of build.tcl
+	- Change your IP repository path of Sum_arr obtained from HLS in line no 179 of build.tcl because it has ip repo path which is to be changed according to your ip path.
 
 
 
