@@ -47,6 +47,7 @@ Please make sure to update tests as appropriate.
 ## References:
 
 [Exporting your HLS project as a TCL file](http://venividiwiki.ee.virginia.edu/mediawiki/index.php/Exporting_your_HLS_project_as_a_TCL_file)
+[Version control for Vivado projects](http://www.fpgadeveloper.com/2014/08/version-control-for-vivado-projects.html)
 
 <!--## License
 [MIT](https://choosealicense.com/licenses/mit/) -->
