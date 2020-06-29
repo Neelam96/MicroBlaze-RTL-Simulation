@@ -31,7 +31,7 @@ source <path-to-build.tcl>/build.tcl
 ## Debugging any error encountered while sourcing build.tcl
 	- ERROR: [BD_TCL-115] The following IPs are not found in the IP Catalog.
 	Solution:
-	- Change your IP repository path of Sum_arr obtained from HLS in line no 179 of build.tcl because it has ip repo path which is to be changed according to your ip path.
+	- Change your IP repository path of Sum_arr obtained from HLS in line no 179 of build.tcl because it has ip repo path which is to be changed to your ip path.
 
 
 
@@ -41,8 +41,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
-## Some minor issues that I faced while uploading
-[warning: LF will be replaced by CRLF and Special characters appear](https://github.com/gobuffalo/buffalo/issues/1189)
+<!--## Some minor issues that I faced while uploading
+[warning: LF will be replaced by CRLF and Special characters appear](https://github.com/gobuffalo/buffalo/issues/1189) -->
 
 ## References:
 
