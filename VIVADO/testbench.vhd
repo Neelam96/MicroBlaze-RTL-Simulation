@@ -1,19 +1,6 @@
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
-library ieee;
-
-use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use std.textio.all;
 
@@ -43,18 +30,18 @@ end component;
   signal number_of_bits_received : std_logic_vector (31 downto 0) := x"00000000";
   signal data_received : std_logic_vector (9 downto 0) := "0000000000";
   file output_file_stdout : text; 
-  signal charbuffer : String (1 to 15);         -- this line is changed from signal charbuffer : String (1 to 80);
+  signal charbuffer : String (1 to 20);        
   signal charbuffer_index : integer := 1;
 begin
     uut : design_1_wrapper port map (diff_clock_rtl_0_clk_n => clk_n, diff_clock_rtl_0_clk_p => clk, reset_rtl_0 => rst_n,
                                      uart_rtl_0_txd => rs232_uart_txd,
                                      uart_rtl_0_rxd => rs232_uart_rxd);
 
-  -- system input clock = 200MHz, half-period = 2.5ns
-  -- UART Baud rate 115200. => 200M/115200 TB-clock-cycles.
-  --    200M/115200 = 1736 = 0x6c8, half/mid = 868 = 0x364
-  -- One symbol = 4.16us => 4.16u/5n = 832 = 0x340
-  clk   <= not clk after 2.5 ns ;
+  -- system input clock = 100 MHz, half-period = 5 ns
+  -- UART Baud rate 115200. => 100M/115200 TB-clock-cycles.
+  --    (100M/115200) = 868 = 0x364, half/mid = 434 = 0x1B2
+  
+  clk   <= not clk after 5 ns ;			
   clk_n <= not clk;
 
   process
@@ -68,12 +55,7 @@ begin
     wait;
   end process;
 
-  process
-  begin
-    wait for 10 ns;
-    -- report "counter value is [" & integer'image (to_integer (unsigned (count))) & "]";
-    wait for 10 ns;
-  end process;
+
 
   process (clk)
     variable line1 : line;
@@ -88,12 +70,12 @@ begin
                     counter <= x"00000000";
                 end if;
             when "001" => -- start bit clock cycles
-                if counter = x"00000364" then -- (200M/2400)/2 = 83333/2 = 41666 = 0xa2c2
+                if counter = x"000001B2" then 
                     character_state <= "010"; -- reached middle of start bit.
                     counter <= x"00000000";
                 end if;
             when "010" => -- receiving characters
-                if counter = x"000006c8" then -- goto next character
+                if counter = x"00000364" then -- goto next character
                     data_received(9) <= rs232_uart_txd;
                     data_received(8 downto 0) <= data_received(9 downto 1);
                     counter <= x"00000000";
@@ -105,11 +87,11 @@ begin
                     end if;
                 end if;
             when "011" =>
-                if counter = x"000006c8" then -- middle of stop character
+                if counter = x"00000364" then -- middle of stop character
                     -- report "received " & integer'image (to_integer (unsigned (data_received(9 downto 2))));
                     -- write (line1, character'val(to_integer(unsigned(data_received(9 downto 2)))));
                     -- writeline (output_file_stdout, line1);
-                    if (charbuffer_index = 14) then         -- this line is changed by Neelam from if (charbuffer_index = 79) then
+                    if (charbuffer_index = 19) then         
                         charbuffer (1) <= character'val(to_integer(unsigned(data_received(9 downto 2))));
                         charbuffer_index <= 2;
                         write (line1, charbuffer, left);
