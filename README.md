@@ -29,10 +29,13 @@ source <path-to-build.tcl>/build.tcl
 ```
 
 ##Example calculations for an input clock of 100MHz in block design
-
+Below calculations can be found in testbench.vhd for their use in the same file.
+```
 system input clock = 100 MHz, half-period = 5 ns
 UART Baud rate 115200. => 100M/115200 TB-clock-cycles.
 (100M/115200) = 868 = 0x364, half/mid = 434 = 0x1B2
+
+```
 
 ## Debugging any error encountered while sourcing build.tcl
 	- ERROR: [BD_TCL-115] The following IPs are not found in the IP Catalog.
