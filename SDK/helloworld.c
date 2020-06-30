@@ -21,7 +21,7 @@ int main()
     Xil_Out32 (XPAR_BRAM_0_BASEADDR+(4*i),itof.a);
     }
 
-    Xil_Out32 ((XPAR_SUM_ARR_0_S_AXI_AXILITES_BASEADDR+0x18), XPAR_BRAM_0_BASEADDR);	//Sending image pointer address using offset
+    Xil_Out32 ((XPAR_SUM_ARR_0_S_AXI_AXILITES_BASEADDR+0x18), XPAR_BRAM_0_BASEADDR);	//Sending array pointer address using offset
 
     Xil_Out32 ((XPAR_SUM_ARR_0_S_AXI_AXILITES_BASEADDR+0x00), 1);				//Start the IP
 
